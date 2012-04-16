@@ -787,7 +787,7 @@ var PageView = function pageView(container, pdfPage, id, scale,
     }
     function createElementWithStyle(tagName, item) {
       var rect = viewport.convertToViewportRectangle(item.rect);
-      rect = Util.normalizeRect(rect);
+      rect = PDFJS.Util.normalizeRect(rect);
       var element = document.createElement(tagName);
       element.style.left = Math.floor(rect[0]) + 'px';
       element.style.top = Math.floor(rect[1]) + 'px';
@@ -1284,7 +1284,6 @@ window.addEventListener('load', function webViewerLoad(evt) {
 
   var file = PDFJS.isFirefoxExtension ?
               window.location.toString() : params.file || kDefaultURL;
-  PDFView.open(file, 0);
 
   if (PDFJS.isFirefoxExtension || !window.File || !window.FileReader ||
       !window.FileList || !window.Blob) {
@@ -1316,6 +1315,7 @@ window.addEventListener('load', function webViewerLoad(evt) {
 
   var sidebarScrollView = document.getElementById('sidebarScrollView');
   sidebarScrollView.addEventListener('scroll', updateThumbViewArea, true);
+  PDFView.open(file, 0);
 }, true);
 
 /**
